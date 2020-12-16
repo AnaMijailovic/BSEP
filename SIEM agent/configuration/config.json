@@ -1,0 +1,39 @@
+{
+  "windows_logs": {
+    "watch": "True",
+    "server": "localhost",
+    "log_type": "System",
+    "regex": []
+},
+  "paths": [{
+    "source_name": "siem agent",
+    "directory_path": "./",
+    "file_names": [],
+    "recursive": "True",
+    "parse_log": {
+      "datetime_format": "%Y-%m-%d %H:%M",
+      "datetime_regex": "[A-Z]* (\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}) [0-9]* [a-zA-Z1-9_ ]*",
+      "source_name_regex": "[A-Z]* \\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2} [0-9]* ([a-zA-Z1-9_ ]*)",
+      "severity_level_regex": "([A-Z]*) \\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2} [0-9]* [a-zA-Z1-9_ ]*",
+      "event_id_regex": "[A-Z]* \\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2} ([0-9]*) [a-zA-Z1-9_ ]*",
+      "message_regex": "[A-Z]* \\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2} [0-9]* [a-zA-Z1-9_ ]* - (.*)"
+    },
+    "regex": []
+  },
+{
+  "source_name": "simulator",
+  "directory_path": "../simulator",
+  "file_names": ["simulated_logs.log"],
+  "recursive": "False",
+  "parse_log": "False",
+  "regex": []
+},
+{
+  "source_name": "simulator",
+  "directory_path": "../simulator",
+  "file_names": ["linux_log.log"],
+  "recursive": "False",
+  "parse_log": "Linux",
+  "regex": []
+}
+    ]}

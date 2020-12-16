@@ -1,0 +1,43 @@
+.buttonRight {
+    float: right;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-right: 5%;
+}
+
+table {
+    width: 95%;
+    margin-left: auto;
+    margin-top: auto;
+    tr:nth-child(even) {background: #f2e6c4}
+    tr:nth-child(odd) {background: #FFF}
+}
+
+.width60 {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.centered {
+    margin-left: 50%;
+    margin-top: 3%
+}
+
+.category-table-div {
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+th {
+    font-size: 18px;
+    color: black;
+}
+
+tr {
+    font-size: 10px;
+}

@@ -1,2 +1,2 @@
 # BSEP
-Timski projekat iz predmeta Bezbednost u sistemima elektronskog poslovanja
+Bezbednost u sistemima elektronskog poslovanja

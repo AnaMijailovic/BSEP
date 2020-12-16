@@ -1,0 +1,6 @@
+<app-navbar-administrator *ngIf="role==='ROLE_ADMINISTRATOR'"></app-navbar-administrator>
+<app-navbar-operator *ngIf="role==='ROLE_OPERATOR'"></app-navbar-operator>
+
+<div layout="row" layout-fill layout-align="center center">
+<router-outlet (activate)="checkRole()"></router-outlet>
+</div>

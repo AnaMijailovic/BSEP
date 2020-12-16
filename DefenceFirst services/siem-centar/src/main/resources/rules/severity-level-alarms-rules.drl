@@ -1,0 +1,46 @@
+package rules;
+
+import com.defencefirst.siemcentar.model.siem.Log;
+import com.defencefirst.siemcentar.model.siem.Alarm;
+import com.defencefirst.siemcentar.service.AlarmService;
+import java.util.Date;
+
+global AlarmService alarmService;
+
+rule "Raised alarm for log with severity level ERROR"
+    when
+        $log: Log(severityLevel.equals("ERROR"))
+    then
+    	Alarm alarm = new Alarm();
+    	alarm.setDatetime(new Date());
+    	alarm.setMessage($log.getMessage());
+    	alarmService.save(alarm);
+        System.out.println("Raised alarm for log with id: "+$log.getId() +" and severity level ERROR");
+
+end;
+
+rule "Raised alarm for log with severity level WARN"
+    when
+        $log: Log(severityLevel.equals("WARN"))
+    then
+    	Alarm alarm = new Alarm();
+    	alarm.setDatetime(new Date());
+    	alarm.setMessage($log.getMessage());
+    	alarmService.save(alarm);
+        System.out.println("Raised alarm for log with id: "+$log.getId() +" and severity level WARN");
+
+end;
+
+rule "Raised alarm for log with severity level INFO"
+    when
+        $log: Log(severityLevel.equals("INFO"))
+    then
+    	Alarm alarm = new Alarm();
+    	alarm.setDatetime(new Date());
+    	alarm.setMessage($log.getMessage());
+    	alarmService.save(alarm);
+        System.out.println("Raised alarm for log with id: "+$log.getId() +" and severity level INFO");
+
+end;
+
+

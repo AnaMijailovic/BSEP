@@ -1,0 +1,284 @@
+<mat-card class="admin-profile-box">
+    <mat-horizontal-stepper labelPosition="bottom" #stepper id="add-cert-form">
+        <mat-step [stepControl]="generalInformationFormGroup">
+            <form [formGroup]="generalInformationFormGroup">
+                <ng-template matStepLabel>General information</ng-template>
+                <table>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td><b>Certificate type *</b></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mat-radio-group formControlName="certificateType" class="certificate-type-radio-group"
+                            (change)=onCertTypeChange()>
+                                <mat-radio-button class="certificate-type-radio-button"
+                                    *ngFor="let type of certificateTypes " [value]="type">
+                                    {{type}}
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </td> 
+                    </tr>
+                    <tr>
+                        <td>
+                                <mat-form-field class="medium-form-filed">
+                                    <input  matInput hidden formControlName="certificateType">
+                                    <mat-error>You must pick a certificate type</mat-error>
+                                </mat-form-field>
+                                
+                        </td>
+                    </tr>
+               
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td><b>Validity *</b></td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <mat-form-field class="medium-form-filed">
+                                <input id="not-before-input" matInput formControlName="notBefore"
+                                    [matDatepicker]="pickerNotBefore" placeholder="Not Before date">
+                                    <mat-error *ngIf="generalInformationFormGroup.controls.notBefore.errors?.required && !generalInformationFormGroup.controls.notBefore.errors?.invalidDate">This field is required</mat-error>
+                                        <mat-error *ngIf="generalInformationFormGroup.controls.notBefore.errors?.invalidDate && !generalInformationFormGroup.controls.notBefore.errors?.required">You must pick a date in the future</mat-error>
+        
+                                <mat-datepicker-toggle matSuffix [for]="pickerNotBefore"></mat-datepicker-toggle>
+                                <mat-datepicker #pickerNotBefore></mat-datepicker>
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mat-form-field class="medium-form-filed">
+                                <input id="not-before-input" matInput formControlName="notAfter"
+                                    [matDatepicker]="pickerNotAfter" placeholder="Not After date">
+                                  <mat-error *ngIf="generalInformationFormGroup.controls.notAfter.errors?.required && !generalInformationFormGroup.controls.notAfter.errors?.invalidDate">This field is required</mat-error>
+                                        <mat-error *ngIf="generalInformationFormGroup.controls.notAfter.errors?.invalidDate && !generalInformationFormGroup.controls.notAfter.errors?.required">You must pick a date in the future</mat-error>
+                                    
+                                <mat-datepicker-toggle matSuffix [for]="pickerNotAfter"></mat-datepicker-toggle>
+                                <mat-datepicker #pickerNotAfter></mat-datepicker>
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div align="center">
+                                <button mat-button matStepperNext>Next</button>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="issuerFormGroup">
+            <form [formGroup]="issuerFormGroup" class="issuer-form">
+                <ng-template matStepLabel>Issuer</ng-template>
+                <table align="center">
+                    <tr>
+                        <td colspan="2">
+                            <mat-form-field class="medium-form-filed">
+                                <input matInput id="issuer-input" formControlName="issuer" placeholder="Select issuer (start typing for suggestions)"
+                                    [matAutocomplete]="autoIssuer">
+                                <mat-autocomplete #autoIssuer="matAutocomplete" (optionSelected)="getChosenIssuer()">
+                                    <mat-option *ngFor="let issuer of filteredIssuers | async"
+                                        [value]="issuer.commonName + ' | num: ' + issuer.certSerialNumber">
+                                        <span>{{ issuer.commonName }}</span> |
+                                        <small> num: {{ issuer.certSerialNumber }} </small>
+                                    </mat-option>
+                                </mat-autocomplete>
+
+                            </mat-form-field>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%">
+                            <mat-form-field class="medium-form-filed">
+                                <input matInput formControlName="commonName"   placeholder="Common name *" (focusout)="subjectClick()" />
+                            </mat-form-field>
+
+                        </td>
+
+                        <td>
+                            <mat-form-field class="medium-form-filed">
+                                <input matInput formControlName="givenName" placeholder="Given name" />
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td >
+                            <mat-form-field class="medium-form-filed">
+                                <input matInput formControlName="surname" placeholder="Surname" />
+                            </mat-form-field>
+                        </td>
+                 
+                        <td >
+                            <mat-form-field class="medium-form-filed">
+                                <input matInput formControlName="email" placeholder="Email" />
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td >
+                            <mat-form-field class="medium-form-filed">
+                                <input matInput formControlName="organization" placeholder="Organization" />
+                            </mat-form-field>
+                        </td>
+
+                        <td >
+                            <mat-form-field class="medium-form-filed">
+                                <input matInput formControlName="organizationalUnit"
+                                    placeholder="Organizational unit" />
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td >
+                            <mat-form-field class="medium-form-filed">
+                                <input matInput formControlName="stateOrProvinceName" placeholder="State/Province" />
+                            </mat-form-field>
+                        </td>
+
+                        <td>
+                            <mat-form-field class="medium-form-filed">
+                                <input matInput formControlName="country" placeholder="Country" />
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mat-form-field class="medium-form-filed">
+                                <input matInput formControlName="locality" placeholder="Locality" />
+                            </mat-form-field>
+                        </td>
+
+                        <td>
+                            <div align="center">
+                                <button mat-button matStepperPrevious>Back</button>
+                                <button mat-button matStepperNext>Next</button>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="subjectFormGroup">
+            <form [formGroup]="subjectFormGroup" class="issuer-form">
+                <ng-template matStepLabel>Subject</ng-template>
+            <p> * Fill for intermediate and end user</p>
+                <table align="center">
+                    
+                    <tr>
+                        <td>
+                            <mat-form-field class="medium-form-filed">
+                                <input matInput formControlName="commonName" placeholder="Common name *" />
+                            </mat-form-field>
+                        </td>
+
+                        <td>
+                            <mat-form-field class="medium-form-filed">
+                                <input matInput formControlName="givenName" placeholder="Given name" />
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mat-form-field class="medium-form-filed">
+                                <input matInput formControlName="surname" placeholder="Surname" />
+                            </mat-form-field>
+                        </td>
+              
+                        <td>
+                            <mat-form-field class="medium-form-filed">
+                                <input matInput formControlName="email" placeholder="Email" />
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mat-form-field class="medium-form-filed">
+                                <input matInput formControlName="organization" placeholder="Organization" />
+                            </mat-form-field>
+                        </td>
+
+                        <td>
+                            <mat-form-field class="medium-form-filed">
+                                <input matInput formControlName="organizationalUnit"
+                                    placeholder="Organizational unit" />
+                            </mat-form-field>
+                        </td>
+                    </tr> 
+                    <tr>
+
+                        <td>
+                            <mat-form-field class="medium-form-filed">
+                                <input matInput formControlName="stateOrProvinceName" placeholder="State/Province" />
+                            </mat-form-field>
+                        </td>
+
+                        <td>
+                            <mat-form-field class="medium-form-filed">
+                                <input matInput formControlName="country" placeholder="Country" />
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mat-form-field class="medium-form-filed">
+                                <input matInput formControlName="locality" placeholder="Locality" />
+                            </mat-form-field>
+                        </td>
+
+                        <td>
+                            <div align="center">
+                                <button mat-button matStepperPrevious>Back</button>
+                                <button mat-button matStepperNext>Next</button>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </mat-step>
+
+        <mat-step [stepControl]="extentionsFormGroup">
+                <form [formGroup]="extentionsFormGroup">
+                    <ng-template matStepLabel>Extentions</ng-template>
+                    <p><b>Key usage:</b></p>
+                    <table align="center">
+                     <tr>
+                            <td>
+                                    <mat-checkbox formControlName="isCritical"> isCritical </mat-checkbox>
+                                    </td>
+                     </tr>
+                     <tr><td>&nbsp;</td></tr>
+                     <tr *ngFor="let item of keyUsageExtention | keyvalue" >
+                         <td *ngIf="item.key !== 'isCritical'">
+                        <mat-checkbox formControlName="{{item.key}}"> {{item.key}} </mat-checkbox>
+                        </td>
+                     </tr>
+                     <tr><td>&nbsp;</td></tr>
+                     <tr>
+                            <td>
+                                <div align="center">
+                                    <button mat-button matStepperPrevious>Back</button>
+                                    <button id="add-cert-submit-btn" class="form-btn" (click)="submit()" 
+                                                   mat-stroked-button color="primary">Submit</button>
+                                </div>
+                            </td>
+                        </tr>
+                     
+                    </table>
+                </form>
+            </mat-step>
+    </mat-horizontal-stepper>
+</mat-card>

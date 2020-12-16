@@ -1,0 +1,12 @@
+package rules;
+
+import com.defencefirst.siemcentar.model.Item;
+
+
+rule "Classify Item CHEAP"
+    when
+        $i: Item(category == Category.NA )
+    then
+        $i.setCategory(Item.Category.CHEAP);
+        update($i);
+end

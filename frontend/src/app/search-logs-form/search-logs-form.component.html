@@ -1,0 +1,73 @@
+<mat-expansion-panel class="search-expansion-panel">
+    <mat-expansion-panel-header>
+        <mat-panel-title align="right">
+           Search logs
+        </mat-panel-title>
+
+    </mat-expansion-panel-header>
+
+    <form [formGroup]="searchForm" noval align="center" (ngSubmit)="onSearchSubmit()">
+        <table align="center">
+            <tr>
+                <td>
+                    <mat-form-field class="medium-form-filed">
+                        <input matInput id="event-id-search" formControlName="eventId" placeholder="Event id">
+                    </mat-form-field>
+                </td>
+
+                <td>
+                    <mat-form-field class="medium-form-filed">
+                        <input matInput id="mac" formControlName="mac" placeholder="Mac">
+                    </mat-form-field>
+                </td>
+
+                <td>
+                    <mat-form-field class="medium-form-filed">
+                        <input matInput id="severity-level" formControlName="severityLevel" placeholder="Severity level">
+                    </mat-form-field>
+                </td>
+
+                <td>
+                    <mat-form-field class="medium-form-filed">
+                        <input matInput id="source-name" formControlName="sourceName" placeholder="Source name">
+                    </mat-form-field>
+                </td>
+            </tr>
+
+            <tr>
+
+
+                <td colspan="2">
+                    <mat-form-field class="medium-form-filed">
+                        <input matInput id="message" formControlName="message" placeholder="Message">
+                    </mat-form-field>
+                </td>
+
+                <td>
+                    <mat-form-field>
+                        <input matInput id="from-date-search" formControlName="fromDate" [matDatepicker]="pickerFrom" placeholder="From date">
+                        <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerFrom></mat-datepicker>
+                    </mat-form-field>
+                </td>
+
+                <td>
+                    <mat-form-field>
+                        <input matInput id="to-date-search" formControlName="toDate" [matDatepicker]="pickerTo" placeholder="To date">
+                        <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerTo></mat-datepicker>
+                    </mat-form-field>
+                </td>
+
+            </tr>
+
+            <tr>
+                <td colspan="4" align="right">
+                    <button id="reset-search-form-btn" class="form-btn" type="reset" mat-stroked-button color="primary">Reset</button>
+                    <button id="search-btn" class="form-btn" type="submit" mat-stroked-button color="primary">Search</button>
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</mat-expansion-panel>

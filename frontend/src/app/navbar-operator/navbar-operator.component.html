@@ -1,0 +1,26 @@
+<mat-toolbar color="primary" class="navbar">
+    <div>
+      <button mat-button [routerLink]="['/home']">
+        <mat-icon>security</mat-icon>
+        <span>Defence First</span>
+      </button>
+    </div>
+    <span class="spacer"></span>
+      <div>
+        <button mat-button [routerLink]="['/logs']">
+          <span>Logs</span>
+        </button>
+      </div>
+  
+      <div>
+        <button mat-button [routerLink]="['/log-reports']">
+          <span>Log Reports</span>
+        </button>
+      </div>
+  
+    <button mat-button (click)="logOut()" id="logout-btn">
+      <mat-icon>highlight_off</mat-icon>
+      <span>Logout</span>
+    </button>
+
+  </mat-toolbar>

@@ -1,0 +1,4 @@
+<app-search-logs-form (sendSearchParams)="sendSearchFormParams($event)"></app-search-logs-form>
+<button mat-raised-button color="primary" class='real-time-btn' *ngIf="!realTime" (click)="startRealTime()">Real time</button>
+<button mat-raised-button color="primary" class='real-time-btn' *ngIf="realTime" (click)="stopRealTime()">Stop real time</button>
+<app-logs-table [logs]="logs" ></app-logs-table>

@@ -1,0 +1,29 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.admin-profile-box{
+    top: 10px;
+    left: 20%;
+    width: 60%;
+    opacity: 1;
+    background: #ffff;
+    border-radius: 10px;
+    transform: scale(1);
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    z-index: 5;
+    box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.2), 6px 6px 15px 6px rgba(0, 0, 0, 0.19);
+}
+
+.snackBar {
+    background: blue;
+    color: white;
+    display: block;
+}
+
+.snackBar span {
+    margin: auto;
+    text-align: center;
+}

@@ -1,0 +1,9 @@
+{
+    "/pki/*": {
+        "target": "https://localhost:8765",
+        "secure": true,
+        "logLevel": "debug"
+    }
+}
+
+    

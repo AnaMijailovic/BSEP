@@ -1,0 +1,36 @@
+server:
+  port: ${PORT:8765}
+  ssl:
+    key-store-type: PKCS12
+    key-store: src/main/resources/keystore.p12
+    key-store-password: keystore
+    key-alias: keystore
+ #   client-auth: need
+
+spring:
+  application:
+    name: api-gateway
+
+security:
+  require:
+    ssl: true
+
+zuul:
+  sensitiveHeaders: Cookie, Set-Cookie
+  ignoredServices: '*'
+  routes:
+    pki-service:
+      path: /pki/**
+      url: https://localhost:8081/pki
+      serviceId: pki
+    siem-centar-service:
+      path: /siem/**
+      url: https://localhost:8082/siem
+      serviceId: siem
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: https://eurekaserver:password@localhost:8761/eureka

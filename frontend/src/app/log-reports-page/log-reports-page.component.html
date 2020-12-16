@@ -1,0 +1,11 @@
+<div>
+<div id="report-form">
+<app-log-reports  (sendReportParams)="sendReportParams($event)"></app-log-reports>
+</div>
+<div *ngIf="severityLevelData" class="bar-chart">
+    <app-bar-chart id="severity-level-chart" [barChartLabels]="severityLevelLabels" [barChartDataArray]="severityLevelData" [dataLabel]="severityLevelLabel"></app-bar-chart>
+</div>
+<div *ngIf="eventIdData" class="bar-chart">
+    <app-bar-chart id="event-id-chart" [barChartLabels]="eventIdLabels" [barChartDataArray]="eventIdData" [dataLabel]="eventIdLabel"></app-bar-chart>
+</div>
+</div>

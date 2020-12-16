@@ -1,0 +1,13 @@
+koriscen alat:
+https://slproweb.com/products/Win32OpenSSL.html
+video tutorijali:
+https://www.youtube.com/watch?v=STvT3Qanors
+https://www.youtube.com/watch?v=HLSmjZ5vN0w
+uputstva:
+https://www.baeldung.com/spring-boot-https-self-signed-certificate
+
+to do:
+-https-om povezati mikroservisnu arhitekturu(back)
+-https-om povezati back i front
+-sertifikat smestiti u trusted u browseru da se pojavi zeleni lokot
+ 
